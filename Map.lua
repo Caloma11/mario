@@ -167,25 +167,14 @@ function Map:getTile(x, y)
     return self.tiles[(y - 1) * self.mapWidth + x]
 end
 
--- updates camera offset with delta time
-
+-- function to update camera offset with delta time
 function Map:update(dt)
-    if love.keyboard.isDown('w') then
-        -- up movement
-        self.camY = math.max(0, self.camY + -SCROLL_SPEED * dt)
-    elseif love.keyboard.isDown('a') then
-        -- left movement
-        self.camX = math.max(0, self.camX + - SCROLL_SPEED * dt)
-    elseif love.keyboard.isDown('s') then
-        -- down movement
-        self.camY = math.min(self.mapHeightPixels - VIRTUAL_HEIGHT, self.camY + SCROLL_SPEED * dt)
-    elseif love.keyboard.isDown('d') then
-        -- right movement
-        self.camX = math.min(self.mapWidthPixels - VIRTUAL_WIDTH , math.floor(self.camX + SCROLL_SPEED * dt))
-    end
-
     self.player:update(dt)
 
+    -- keep camera's X coordinate following the player, preventing camera from
+    -- scrolling past 0 to the left and the map's width
+    self.camX = math.max(0, math.min(self.player.x - VIRTUAL_WIDTH / 2,
+        math.min(self.mapWidthPixels - VIRTUAL_WIDTH, self.player.x)))
 end
 
 function Map:render()
