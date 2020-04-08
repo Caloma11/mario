@@ -1,10 +1,10 @@
-WINDOW_WIDTH = 1024
-WINDOW_HEIGHT = 576
+WINDOW_WIDTH = 1280
+WINDOW_HEIGHT = 720
 
 -- 16:9 res
 
-VIRTUAL_WIDTH = 426
-VIRTUAL_HEIGHT = 240
+VIRTUAL_WIDTH = 432
+VIRTUAL_HEIGHT = 243
 
 
 Class = require 'class' -- https://github.com/vrld/hump/blob/master/class.lua
