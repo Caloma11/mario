@@ -10,7 +10,7 @@ VIRTUAL_HEIGHT = 243
 Class = require 'class' -- https://github.com/vrld/hump/blob/master/class.lua
 push = require 'push' -- https://github.com/Ulydev/push
 
-require 'Utils'
+require 'Util'
 
 
 require 'Map'
@@ -35,7 +35,6 @@ function love.draw()
 
     push:apply('start')
     love.graphics.clear(108 / 255, 140 / 255, 255 / 255, 1)
-    love.graphics.print("Hello World")
     map:render()
     push:apply('end')
 
