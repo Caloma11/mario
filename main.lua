@@ -1,16 +1,16 @@
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
+WINDOW_WIDTH = 1024
+WINDOW_HEIGHT = 576
 
 -- 16:9 res
 
-VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243
+VIRTUAL_WIDTH = 426
+VIRTUAL_HEIGHT = 240
 
 
 Class = require 'class' -- https://github.com/vrld/hump/blob/master/class.lua
 push = require 'push' -- https://github.com/Ulydev/push
 
-require 'Util'
+-- require 'Util'
 
 
 require 'Map'
@@ -27,15 +27,22 @@ function love.load()
     })
 end
 
-function love.update()
+-- called every frame, dt is delta time since last frame
 
+function love.update(dt)
+    map:update(dt)
 end
+
+-- called every frame, renders the screen
 
 function love.draw()
 
-    push:apply('start')
-    love.graphics.clear(108 / 255, 140 / 255, 255 / 255, 1)
+    push:apply('start') -- virtual res drawing
+--
+    love.graphics.translate(math.floor(-map.camX), math.floor(-map.camY))
+
+    love.graphics.clear(108 / 255, 140 / 255, 255 / 255, 1) -- background
     map:render()
-    push:apply('end')
+    push:apply('end') -- end virtual res drawing
 
 end
