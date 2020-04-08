@@ -15,9 +15,13 @@ push = require 'push' -- https://github.com/Ulydev/push
 
 require 'Map'
 
-function love.load()
-    map = Map()
 
+function love.load()
+
+math.randomseed(os.time())
+
+
+map = Map()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
