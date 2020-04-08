@@ -19,10 +19,18 @@ function Map:init()
     self.mapHeight  = 28
     self.tiles = {}
 
+    -- camera offsets
+
     self.camX = 0
-    self.camY = 0
+    self.camY = -3
+
+    -- generate a quad for each tile
 
     self.tileSprites = generateQuads(self.spritesheet, self.tileWidth, self.tileHeight)
+
+    self.mapWidthPixels = self.mapWidth * self.tileWidth
+    self.mapHeightPixels = self.mapHeight * self.tileHeight
+
 
     -- fills the map with empty tiles
 
@@ -41,17 +49,35 @@ function Map:init()
     end
 end
 
+-- sets a tile on a x,y coord to an int value
+
 function Map:setTile(x, y, tile)
     self.tiles[(y - 1) * self.mapWidth + x] = tile
 end
+
+-- returns an int for the tile at a x,y coord
 
 function Map:getTile(x, y)
     return self.tiles[(y - 1) * self.mapWidth + x]
 end
 
+-- updates camera offset with delta time
 
 function Map:update(dt)
-    self.camX = self.camX + SCROLL_SPEED * dt
+    if love.keyboard.isDown('w') then
+        -- up movement
+        self.camY = math.max(0, self.camY + -SCROLL_SPEED * dt)
+    elseif love.keyboard.isDown('a') then
+        -- left movement
+        self.camX = math.max(0, self.camX + - SCROLL_SPEED * dt)
+    elseif love.keyboard.isDown('s') then
+        -- down movement
+        self.camY = math.min(self.mapHeightPixels - VIRTUAL_HEIGHT, self.camY + SCROLL_SPEED * dt)
+    elseif love.keyboard.isDown('d') then
+        -- right movement
+        self.camX = math.min(self.mapWidthPixels - VIRTUAL_WIDTH , math.floor(self.camX + SCROLL_SPEED * dt))
+    end
+
 end
 
 function Map:render()
