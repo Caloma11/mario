@@ -10,6 +10,9 @@ VIRTUAL_HEIGHT = 243
 Class = require 'class' -- https://github.com/vrld/hump/blob/master/class.lua
 push = require 'push' -- https://github.com/Ulydev/push
 
+require 'Utils'
+
+
 require 'Map'
 
 function love.load()
