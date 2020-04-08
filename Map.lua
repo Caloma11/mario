@@ -1,6 +1,7 @@
 -- Tile data and rendering tile map to screen
 
 require 'Util'
+require 'Player'
 
 Map = Class{}
 
@@ -34,6 +35,8 @@ function Map:init()
     self.mapWidth = 30
     self.mapHeight  = 28
     self.tiles = {}
+
+    self.player = Player(self)
 
     -- camera offsets
 
@@ -181,6 +184,8 @@ function Map:update(dt)
         self.camX = math.min(self.mapWidthPixels - VIRTUAL_WIDTH , math.floor(self.camX + SCROLL_SPEED * dt))
     end
 
+    self.player:update(dt)
+
 end
 
 function Map:render()
@@ -193,4 +198,7 @@ function Map:render()
             end
         end
     end
+
+    self.player:render()
+
 end
