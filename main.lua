@@ -18,6 +18,9 @@ require 'Map'
 
 function love.load()
 
+    love.window.setTitle('Alien Mario')
+
+
     math.randomseed(os.time())
 
 

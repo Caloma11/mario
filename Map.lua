@@ -66,13 +66,13 @@ function Map:init()
     local x = 1
     while x < self.mapWidth do
 
-        --  1/3 chance to generate a cloud
+        -- 10/3 chance of generating a cloud
         -- makes sures there's a 2 tiles distance from the edge
         if x < self.mapWidth - 2 then
             if math.random(30) == 1 then
                 -- choose a random vertical tile above where blocks generate
 
-                local cloudStart = math.random(self.mapHeight / 2 -6)
+                local cloudStart = math.random(self.mapHeight / 2 - 6)
 
                 self:setTile(x, cloudStart, CLOUD_LEFT)
                 self:setTile(x + 1, cloudStart, CLOUD_RIGHT)
@@ -125,6 +125,7 @@ function Map:init()
                 self:setTile(x, y, TILE_BRICK)
             end
 
+
             -- chance to create a hit block
 
             if math.random(15) == 1 then
@@ -135,24 +136,12 @@ function Map:init()
 
         else
             -- increment two scanlines, creating a gap
-
             x =  x + 2
 
         end
 
     end
 
-
-
-
-
-    -- fills bottom half with bricks
-
-    for  y = self.mapHeight  / 2, self.mapHeight do
-        for x = 1, self.mapWidth do
-            self:setTile(x, y, TILE_BRICK)
-        end
-    end
 end
 
 -- sets a tile on a x,y coord to an int value
