@@ -8,6 +8,9 @@ local GRAVITY = 4
 
 
 function Player:init(map)
+
+    self.map = map
+
     self.width = 16
     self.height = 20
 
@@ -131,7 +134,31 @@ function  Player:update(dt)
     self.currentFrame = self.animation:getCurrentFrame()
     self.x = self.x + self.dx * dt
     self.y = self.y + self.dy * dt
+
+    -- if y velocity is negative (jumping), check collision with blocks above
+
+    if self.dy < 0 then
+        if self.map:tileAt(self.x, self.y).id ~= TILE_EMPTY or
+            self.map:tileAt(self.x + self.width - 1, self.y).id ~= TILE_EMPTY then
+            -- reset y velocity
+            self.dy = 0
+
+            -- change collided block
+
+            if self.map:tileAt(self.x, self.y).id == JUMP_BLOCK then
+                self.map:setTile(math.floor(self.x / self.map.tileWidth) + 1,
+                    math.floor(self.y / self.map.tileHeight) + 1, JUMP_BLOCK_HIT)
+            end
+
+            if self.map:tileAt(self.x + self.width - 1, self.y).id == JUMP_BLOCK then
+                self.map:setTile(math.floor((self.x + self.width - 1) / self.map.tileWidth) + 1,
+                    math.floor(self.y / self.map.tileHeight) + 1, JUMP_BLOCK_HIT)
+            end
+
+        end
+    end
 end
+
 
 function Player:render()
 
