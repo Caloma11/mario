@@ -29,6 +29,7 @@ function Animation:update(dt)
 
             self.currentFrame = (self.currentFrame + 1) % (#self.frames + 1)
 
-        if self.currentFrame == 0 then self. currentFrame = 1 end
+            if self.currentFrame == 0 then self. currentFrame = 1 end
+        end
     end
 end
