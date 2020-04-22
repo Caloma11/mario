@@ -157,6 +157,27 @@ function Map:getTile(x, y)
     return self.tiles[(y - 1) * self.mapWidth + x]
 end
 
+
+-- return whether a given tile is collidable
+function Map:collides(tile)
+    -- define our collidable tiles
+    local collidables = {
+        TILE_BRICK, JUMP_BLOCK, JUMP_BLOCK_HIT,
+        MUSHROOM_TOP, MUSHROOM_BOTTOM
+    }
+
+    -- iterate and return true if our tile type matches
+    for _, v in ipairs(collidables) do
+        if tile.id == v then
+            return true
+        end
+    end
+
+    return false
+end
+
+
+
 -- function to update camera offset with delta time
 function Map:update(dt)
     self.player:update(dt)
