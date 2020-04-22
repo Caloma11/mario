@@ -31,6 +31,7 @@ local SCROLL_SPEED = 62
 
 function Map:init()
     self.spritesheet = love.graphics.newImage('graphics/spritesheet.png')
+    self.music = love.audio.newSource('sounds/music.wav', 'static')
     self.tileWidth = 16
     self.tileHeight = 16
     self.mapWidth = 30
@@ -142,6 +143,14 @@ function Map:init()
         end
 
     end
+
+    -- starts music
+
+    self.music:setLooping(true)
+    self.music:setVolume(0.25)
+    self.music:play()
+
+
 
 end
 
