@@ -4,7 +4,7 @@ require 'Animation'
 
 local MOVE_SPEED = 80
 local JUMP_VELOCITY = 400
-local GRAVITY = 4
+local GRAVITY = 2
 
 
 function Player:init(map)

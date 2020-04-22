@@ -21,6 +21,13 @@ BUSH_RIGHT = 3
 MUSHROOM_TOP= 10
 MUSHROOM_BOTTOM = 11
 
+-- flag tiles
+
+FLAG_BOTTOM = 16
+FLAG_MIDDLE = 12
+FLAG_TOP = 8
+FLAG_FLAG = 13
+
 -- jump tiles
 JUMP_BLOCK = 5
 JUMP_BLOCK_HIT = 9
@@ -34,7 +41,7 @@ function Map:init()
     self.music = love.audio.newSource('sounds/music.wav', 'static')
     self.tileWidth = 16
     self.tileHeight = 16
-    self.mapWidth = 30
+    self.mapWidth = 45
     self.mapHeight  = 28
     self.tiles = {}
 
@@ -66,7 +73,7 @@ function Map:init()
     -- begin generating the terrain using vertical scan lines
 
     local x = 1
-    while x < self.mapWidth do
+    while x < 30 do
 
         -- 10/3 chance of generating a cloud
         -- makes sures there's a 2 tiles distance from the edge
@@ -144,11 +151,43 @@ function Map:init()
 
     end
 
+    -- generate end game space
+
+    for z = 1, 5 do
+        for y = self.mapHeight / 2, self.mapHeight do
+            self:setTile(self.mapWidth - z, y, TILE_BRICK)
+        end
+        z = z + 1
+    end
+
+
+    for z = 10, 15 do
+        for y = self.mapHeight / 2, self.mapHeight do
+            self:setTile(self.mapWidth - z, y, TILE_BRICK)
+        end
+        z = z + 1
+    end
+
+
+    for height = 0, 5 do
+        for y = self.mapHeight / 2, self.mapHeight do
+            self:setTile(self.mapWidth -11 + height, y - height, TILE_BRICK)
+        end
+    end
+
+
+   -- generate flag
+
+    self:setTile(self.mapWidth  -1, self.mapHeight / 2 - 3, FLAG_TOP)
+    self:setTile(self.mapWidth  , self.mapHeight / 2 - 3, FLAG_FLAG)
+    self:setTile(self.mapWidth  -1, self.mapHeight / 2 -2, FLAG_MIDDLE)
+    self:setTile(self.mapWidth  -1, self.mapHeight / 2 -1, FLAG_BOTTOM)
+
     -- starts music
 
     self.music:setLooping(true)
     self.music:setVolume(0.25)
-    self.music:play()
+    -- self.music:play()
 
 
 
