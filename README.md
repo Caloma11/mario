@@ -2,5 +2,7 @@ A interactive game built in Lua using the LÖVE 2D framework. It is inspired by 
 
 
 
-https://user-images.githubusercontent.com/33554576/129721688-0f73e352-5bc7-4151-9761-c50388e62bea.mp4
+
+https://user-images.githubusercontent.com/33554576/129722332-5bfa5c64-f451-48ac-a042-a60ad877f8fc.mp4
+
 
